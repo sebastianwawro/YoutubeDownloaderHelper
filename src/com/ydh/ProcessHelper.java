@@ -9,6 +9,8 @@ public class ProcessHelper {
         try {
             Process p = Runtime.getRuntime().exec(command);
 
+            //if (command.startsWith("ffmpeg")) return "HOTFIX";
+
             StringBuilder log = new StringBuilder();
 
             try(BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()))) {

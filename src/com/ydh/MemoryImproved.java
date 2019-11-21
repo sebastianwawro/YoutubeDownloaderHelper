@@ -63,7 +63,7 @@ public class MemoryImproved {
 
     public static String produceFFmpegCommand(MovieInfo movieInfo, String fileNameToConvert) {
         StringBuilder commandBuilder = new StringBuilder();
-        commandBuilder.append("ffmpeg -i ");
+        commandBuilder.append("ffmpeg -loglevel error -nostdin -i ");
         commandBuilder.append(fileNameToConvert);
         for (SplitInfo splitInfo : movieInfo.getSplitList()) {
             commandBuilder.append(" -ss ");
@@ -83,7 +83,7 @@ public class MemoryImproved {
 
     public static String produceFFmpegCommandNoVideo(MovieInfo movieInfo, String fileNameToConvert) {
         StringBuilder commandBuilder = new StringBuilder();
-        commandBuilder.append("ffmpeg -i ");
+        commandBuilder.append("ffmpeg -loglevel error -nostdin -i ");
         commandBuilder.append(fileNameToConvert);
         for (SplitInfo splitInfo : movieInfo.getSplitList()) {
             commandBuilder.append(" -ss ");
@@ -103,7 +103,7 @@ public class MemoryImproved {
 
     public static String produceFFmpegCommandConvertOnly(MovieInfo movieInfo, String fileNameToConvert) {
         StringBuilder commandBuilder = new StringBuilder();
-        commandBuilder.append("ffmpeg -i ");
+        commandBuilder.append("ffmpeg -loglevel error -nostdin -i ");
         commandBuilder.append(fileNameToConvert);
         commandBuilder.append(" -acodec mp3 -vcodec copy output.mkv");
         return commandBuilder.toString();
@@ -111,7 +111,7 @@ public class MemoryImproved {
 
     public static String produceFFmpegCommandConvertOnlyNoVideo(MovieInfo movieInfo, String fileNameToConvert) {
         StringBuilder commandBuilder = new StringBuilder();
-        commandBuilder.append("ffmpeg -i ");
+        commandBuilder.append("ffmpeg -loglevel error -nostdin -i ");
         commandBuilder.append(fileNameToConvert);
         commandBuilder.append(" -acodec mp3 -vn output.mp3");
         return commandBuilder.toString();
