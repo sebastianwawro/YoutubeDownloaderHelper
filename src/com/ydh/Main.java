@@ -77,7 +77,7 @@ public class Main {
         for (String fileNew : filesAfter) {
             boolean found = false;
             for (String fileOld : filesBefore) {
-                if (fileNew.equals(fileOld)) found=true;
+                if (!fileNew.equals(fileOld)) found=true;
             }
             return fileNew;
         }
