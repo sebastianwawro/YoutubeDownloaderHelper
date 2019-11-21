@@ -58,6 +58,7 @@ public class Main {
                 if(Config.VERBOSE_CONSOLE) System.out.println("FF OUTPUT: " + outputFF + "\n\n");
                 if(Config.VERBOSE_LOGS) FileManager.writeFile(i+"ffCommand.log", outputFF);
             }
+            if (!removeFile(fileNameToConvert)) throw new Exception("Cannot delete temp file");
         }
     }
     private static List<String> getAllFiles() {
@@ -72,6 +73,20 @@ public class Main {
             }
         }
         return fileList;
+    }
+    private static boolean removeFile(String fileName) {
+        File curDir = new File(".");
+        File[] filesList = curDir.listFiles();
+        for(File f : filesList){
+            //if(f.isDirectory()) getAllFiles(f);
+            if(f.isFile()){
+                if(Config.VERBOSE_CONSOLE) System.out.println("FILE: " + f.getName());
+                if(f.getName().equals(fileName)) {
+                    return f.delete();
+                }
+            }
+        }
+        return false;
     }
     private static String findNewFile(List<String> filesBefore, List<String> filesAfter) {
         for (String fileNew : filesAfter) {
