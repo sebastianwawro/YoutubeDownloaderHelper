@@ -1,0 +1,34 @@
+START
+https://www.youtube.com/watch?v=qPRU8jbZemk
+SPLIT
+0:00:00	Riders on the Storm - Snoop Dogg ft The Doors
+0:04:40	Rush Hour - Christopher Lawrence
+0:08:12	Switch (Twitch) - Fluke
+0:12:18	E-Ville - Sonic Animation
+0:16:24	Lax - Xzibit
+0:19:36	I Do - Chingy
+0:23:15	Back On a Mission - Cirrus
+0:26:46	In My Head - Queens of the Stone Age
+0:30:38	I Am Weightless - Septembre
+0:32:59	Give It All - Rise Against
+0:35:39	Lean Back - Terror Squad
+0:39:31	Rocket Ride (Soulwax Remix) - Felix Da Housecat
+0:42:10	Black Betty - Spiderbait
+0:45:35	Nobody - Skindred
+0:48:48	Celebration Song - Unwritten Law
+0:52:13	The Death and Resurrection Show - Killing Joke
+0:57:09	Mind Killer (Jagz Kooner Remix) - Freeland
+1:02:50	Determined - Mudvayne
+1:05:27	Crashing Foreign Cars - Helmet
+1:07:54	I Need Speed - Capone
+1:11:00	Nothing But You (Cirrus Remix) - Paul Van Dyk 
+1:14:27	Notice of Eviction - The Bronx
+1:16:40	Skeptic - Snapcase
+1:19:03	No W - Ministry
+1:21:54	Hard Ebm - Sin
+1:25:19	That'z My Name - Sly Boogy
+1:28:29	Scavenger - Killradio
+NEXT
+https://www.youtube.com/watch?v=CDFk4LxwvTY
+RAW
+END

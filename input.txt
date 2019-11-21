@@ -1,0 +1,8 @@
+START
+https://www.youtube.com/watch?v=CDFk4LxwvTY
+SPLIT
+0:00:00	part1
+0:00:10	part2
+0:00:20	part3
+0:00:30	part4
+END
