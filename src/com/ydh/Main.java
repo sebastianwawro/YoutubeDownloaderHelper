@@ -58,7 +58,9 @@ public class Main {
                 if(Config.VERBOSE_CONSOLE) System.out.println("FF OUTPUT: " + outputFF + "\n\n");
                 if(Config.VERBOSE_LOGS) FileManager.writeFile(i+"ffCommand.log", outputFF);
             }
-            if (!removeFile(fileNameToConvert)) throw new Exception("Cannot delete temp file");
+            if (Config.AUTO_CLEAN && !movieInfo.isDoSplit())
+                if (!removeFile(fileNameToConvert))
+                    throw new Exception("Cannot delete temp file");
         }
     }
     private static List<String> getAllFiles() {

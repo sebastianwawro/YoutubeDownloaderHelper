@@ -11,6 +11,7 @@ public class Config {
     public static boolean USE_ASYNC_UPGRADE;
     public static boolean VERBOSE_CONSOLE;
     public static boolean VERBOSE_LOGS;
+    public static boolean AUTO_CLEAN;
 
     private Config() {}
 
@@ -30,6 +31,9 @@ public class Config {
 
             VERBOSE_LOGS = Boolean.valueOf(Settings.getProperty("VerboseLogs", "false"));
             LOGGER.info("Config: " + "VerboseLogs" + "=" + VERBOSE_LOGS);
+
+            AUTO_CLEAN = Boolean.valueOf(Settings.getProperty("AutoClean", "false"));
+            LOGGER.info("Config: " + "AutoClean" + "=" + AUTO_CLEAN);
         }
         catch (Exception e) {e.printStackTrace();}
     }
