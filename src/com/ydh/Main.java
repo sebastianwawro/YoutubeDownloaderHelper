@@ -42,22 +42,18 @@ public class Main {
             if(Config.VERBOSE_CONSOLE) System.out.println("FOUND NEW FILE: " + fileNameToConvert);
             if (fileNameToConvert == null) throw new Exception("404 - File not found");
             //CONVERT
+            String ffmpegCommand = null;
             if (movieInfo.isDoSplit()) {
-                String ffmpegCommand = MemoryImproved.produceFFmpegCommand(movieInfo, fileNameToConvert);
-                if(Config.VERBOSE_CONSOLE) System.out.println("FF COMMAND: " + ffmpegCommand + "\n\n");
-                if(Config.VERBOSE_LOGS) FileManager.writeFile(i+"ffCommand.bat", ffmpegCommand);
-                String outputFF = ProcessHelper.execute(ffmpegCommand);
-                if(Config.VERBOSE_CONSOLE) System.out.println("FF OUTPUT: " + outputFF + "\n\n");
-                if(Config.VERBOSE_LOGS) FileManager.writeFile(i+"ffCommand.log", outputFF);
+                ffmpegCommand = MemoryImproved.produceFFmpegCommand(movieInfo, fileNameToConvert);
             }
             else {
-                String ffmpegCommand = MemoryImproved.produceFFmpegCommandConvertOnly(movieInfo, fileNameToConvert);
-                if(Config.VERBOSE_CONSOLE) System.out.println("FF COMMAND: " + ffmpegCommand + "\n\n");
-                if(Config.VERBOSE_LOGS) FileManager.writeFile(i+"ffCommand.bat", ffmpegCommand);
-                String outputFF = ProcessHelper.execute(ffmpegCommand);
-                if(Config.VERBOSE_CONSOLE) System.out.println("FF OUTPUT: " + outputFF + "\n\n");
-                if(Config.VERBOSE_LOGS) FileManager.writeFile(i+"ffCommand.log", outputFF);
+                ffmpegCommand = MemoryImproved.produceFFmpegCommandConvertOnly(movieInfo, fileNameToConvert);
             }
+            if(Config.VERBOSE_CONSOLE) System.out.println("FF COMMAND: " + ffmpegCommand + "\n\n");
+            if(Config.VERBOSE_LOGS) FileManager.writeFile(i+"ffCommand.bat", ffmpegCommand);
+            String outputFF = ProcessHelper.execute(ffmpegCommand);
+            if(Config.VERBOSE_CONSOLE) System.out.println("FF OUTPUT: " + outputFF + "\n\n");
+            if(Config.VERBOSE_LOGS) FileManager.writeFile(i+"ffCommand.log", outputFF);
             if (Config.AUTO_CLEAN && !movieInfo.isDoSplit())
                 if (!removeFile(fileNameToConvert))
                     throw new Exception("Cannot delete temp file");
