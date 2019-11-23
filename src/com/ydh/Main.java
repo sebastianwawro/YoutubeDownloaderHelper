@@ -43,11 +43,25 @@ public class Main {
             if (fileNameToConvert == null) throw new Exception("404 - File not found");
             //CONVERT
             String ffmpegCommand = null;
-            if (movieInfo.isDoSplit()) {
-                ffmpegCommand = MemoryImproved.produceFFmpegCommand(movieInfo, fileNameToConvert);
-            }
-            else {
-                ffmpegCommand = MemoryImproved.produceFFmpegCommandConvertOnly(movieInfo, fileNameToConvert);
+            switch(movieInfo.getMethod()) {
+                case "SPLIT":
+                    ffmpegCommand = MemoryImproved.produceFFmpegCommand(movieInfo, fileNameToConvert);
+                    break;
+                case "RAW":
+                    ffmpegCommand = MemoryImproved.produceFFmpegCommandConvertOnly(movieInfo, fileNameToConvert);
+                    break;
+                case "AUDIOONLY":
+                    throw new Exception("NOT IMPLEMENTED YET");
+                case "VIDEOONLY":
+                    throw new Exception("NOT IMPLEMENTED YET");
+                case "AUDIOFIX":
+                    throw new Exception("NOT IMPLEMENTED YET");
+                case "VIDEOFIX":
+                    throw new Exception("NOT IMPLEMENTED YET");
+                case "AVFIX:":
+                    throw new Exception("NOT IMPLEMENTED YET");
+                default:
+                    throw new Exception("Invalid file content - allowed methods: SPLIT/RAW/AUDIOONLY/VIDEOONLY/AUDIOFIX/VIDEOFIX/AVFIX");
             }
             if(Config.VERBOSE_CONSOLE) System.out.println("FF COMMAND: " + ffmpegCommand + "\n\n");
             if(Config.VERBOSE_LOGS) FileManager.writeFile(i+"ffCommand.bat", ffmpegCommand);

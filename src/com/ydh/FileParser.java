@@ -25,15 +25,24 @@ public class FileParser {
             if (method.equals("SPLIT")) {
                 doSplit = true;
             }
-            else if (method.equals("RAW")) {
+            else {
                 doSplit = false;
             }
-            else {
-                throw new Exception("Invalid file content - specify \"SPLIT\" or \"RAW\" option");
+            switch(method) {
+                case "SPLIT":
+                case "RAW":
+                case "AUDIOONLY":
+                case "VIDEOONLY":
+                case "AUDIOFIX":
+                case "VIDEOFIX":
+                case "AVFIX:":
+                    break;
+                default:
+                    throw new Exception("Invalid file content - allowed methods: SPLIT/RAW/AUDIOONLY/VIDEOONLY/AUDIOFIX/VIDEOFIX/AVFIX");
             }
 
             if (doSplit && !fileTokenizer.hasMoreTokens()) throw new Exception("Invalid file content - no split data supplied");
-            MovieInfo movieInfo = new MovieInfo(movieLink, doSplit);
+            MovieInfo movieInfo = new MovieInfo(movieLink, doSplit, method);
             MemoryImproved.getInstance().getMoviesToDownload().add(movieInfo);
 
             //LOAD SPLIT DATA (IF ANY)
