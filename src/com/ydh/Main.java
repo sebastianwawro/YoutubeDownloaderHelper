@@ -44,22 +44,22 @@ public class Main {
             //CONVERT
             String ffmpegCommand = null;
             switch(movieInfo.getMethod()) {
-                case "SPLIT":
+                case "SPLIT":     //split, with convert to mp3+vcopy
                     ffmpegCommand = MemoryImproved.produceFFmpegCommand(movieInfo, fileNameToConvert);
                     break;
-                case "RAW":
+                case "RAW":       //convert to mp3+vcopy
                     ffmpegCommand = MemoryImproved.produceFFmpegCommandConvertOnly(movieInfo, fileNameToConvert);
                     break;
-                case "AUDIOONLY":
-                    throw new Exception("NOT IMPLEMENTED YET");
-                case "VIDEOONLY":
-                    throw new Exception("NOT IMPLEMENTED YET");
-                case "AUDIOFIX":
-                    throw new Exception("NOT IMPLEMENTED YET");
-                case "VIDEOFIX":
-                    throw new Exception("NOT IMPLEMENTED YET");
-                case "AVFIX:":
-                    throw new Exception("NOT IMPLEMENTED YET");
+                case "AUDIOONLY": //convert to mp3
+                    ffmpegCommand = MemoryImproved.produceFFmpegCommandConvertOnlyNoVideo(movieInfo, fileNameToConvert);
+                case "VIDEOONLY": //convert to x265
+                    ffmpegCommand = MemoryImproved.produceFFmpegCommandConvertOnlyNoAudio(movieInfo, fileNameToConvert);
+                case "AUDIOFIX":  //convert to mp3
+                    ffmpegCommand = MemoryImproved.produceFFmpegCommandAudioFix(movieInfo, fileNameToConvert);
+                case "VIDEOFIX":  //convert to x265
+                    ffmpegCommand = MemoryImproved.produceFFmpegCommandVideoFix(movieInfo, fileNameToConvert);
+                case "AVFIX:":    //convert to mp3+x265
+                    ffmpegCommand = MemoryImproved.produceFFmpegCommandAudioVideoFix(movieInfo, fileNameToConvert);
                 default:
                     throw new Exception("Invalid file content - allowed methods: SPLIT/RAW/AUDIOONLY/VIDEOONLY/AUDIOFIX/VIDEOFIX/AVFIX");
             }

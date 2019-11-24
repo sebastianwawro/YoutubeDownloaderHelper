@@ -107,11 +107,43 @@ public class MemoryImproved {
         return commandBuilder.toString();
     }
 
+    public static String produceFFmpegCommandAudioFix(MovieInfo movieInfo, String fileNameToConvert) {
+        StringBuilder commandBuilder = new StringBuilder();
+        commandBuilder.append("ffmpeg -loglevel error -nostdin -i ");
+        commandBuilder.append(fileNameToConvert);
+        commandBuilder.append(" -acodec mp3 -vcodec copy output.mkv");
+        return commandBuilder.toString();
+    }
+
+    public static String produceFFmpegCommandVideoFix(MovieInfo movieInfo, String fileNameToConvert) {
+        StringBuilder commandBuilder = new StringBuilder();
+        commandBuilder.append("ffmpeg -loglevel error -nostdin -i ");
+        commandBuilder.append(fileNameToConvert);
+        commandBuilder.append(" -an -vcodec libx265 output.mkv");
+        return commandBuilder.toString();
+    }
+
+    public static String produceFFmpegCommandAudioVideoFix(MovieInfo movieInfo, String fileNameToConvert) {
+        StringBuilder commandBuilder = new StringBuilder();
+        commandBuilder.append("ffmpeg -loglevel error -nostdin -i ");
+        commandBuilder.append(fileNameToConvert);
+        commandBuilder.append(" -acodec mp3 -vcodec libx265 output.mkv");
+        return commandBuilder.toString();
+    }
+
     public static String produceFFmpegCommandConvertOnlyNoVideo(MovieInfo movieInfo, String fileNameToConvert) {
         StringBuilder commandBuilder = new StringBuilder();
         commandBuilder.append("ffmpeg -loglevel error -nostdin -i ");
         commandBuilder.append(fileNameToConvert);
         commandBuilder.append(" -acodec mp3 -vn output.mp3");
+        return commandBuilder.toString();
+    }
+
+    public static String produceFFmpegCommandConvertOnlyNoAudio(MovieInfo movieInfo, String fileNameToConvert) {
+        StringBuilder commandBuilder = new StringBuilder();
+        commandBuilder.append("ffmpeg -loglevel error -nostdin -i ");
+        commandBuilder.append(fileNameToConvert);
+        commandBuilder.append(" -an -vcodec copy output.mp3");
         return commandBuilder.toString();
     }
 }
