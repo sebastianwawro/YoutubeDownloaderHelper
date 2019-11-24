@@ -40,6 +40,7 @@ public class Main {
 
             String fileNameToConvert = findNewFile(filesBefore, filesAfter);
             if(Config.VERBOSE_CONSOLE) System.out.println("FOUND NEW FILE: " + fileNameToConvert);
+            if (fileNameToConvert == null) fileNameToConvert = findNewFileSecondChance(filesBefore, filesAfter);
             if (fileNameToConvert == null) throw new Exception("404 - File not found");
             //CONVERT
             String ffmpegCommand = null;
@@ -52,14 +53,19 @@ public class Main {
                     break;
                 case "AUDIOONLY": //convert to mp3
                     ffmpegCommand = MemoryImproved.produceFFmpegCommandConvertOnlyNoVideo(movieInfo, fileNameToConvert);
+                    break;
                 case "VIDEOONLY": //convert to x265
                     ffmpegCommand = MemoryImproved.produceFFmpegCommandConvertOnlyNoAudio(movieInfo, fileNameToConvert);
+                    break;
                 case "AUDIOFIX":  //convert to mp3
                     ffmpegCommand = MemoryImproved.produceFFmpegCommandAudioFix(movieInfo, fileNameToConvert);
+                    break;
                 case "VIDEOFIX":  //convert to x265
                     ffmpegCommand = MemoryImproved.produceFFmpegCommandVideoFix(movieInfo, fileNameToConvert);
+                    break;
                 case "AVFIX:":    //convert to mp3+x265
                     ffmpegCommand = MemoryImproved.produceFFmpegCommandAudioVideoFix(movieInfo, fileNameToConvert);
+                    break;
                 default:
                     throw new Exception("Invalid file content - allowed methods: SPLIT/RAW/AUDIOONLY/VIDEOONLY/AUDIOFIX/VIDEOFIX/AVFIX");
             }
@@ -82,6 +88,7 @@ public class Main {
                     throw new Exception("Cannot delete temp file");
         }
     }
+
     private static List<String> getAllFiles() {
         File curDir = new File(".");
         File[] filesList = curDir.listFiles();
@@ -95,6 +102,7 @@ public class Main {
         }
         return fileList;
     }
+
     private static boolean removeFile(String fileName) {
         File curDir = new File(".");
         File[] filesList = curDir.listFiles();
@@ -109,11 +117,23 @@ public class Main {
         }
         return false;
     }
+
     private static String findNewFile(List<String> filesBefore, List<String> filesAfter) {
         for (String fileNew : filesAfter) {
             boolean found = false;
             for (String fileOld : filesBefore) {
                 if (fileNew.equals(fileOld)) found=true;
+            }
+            if (!found) return fileNew;
+        }
+        return null;
+    }
+
+    private static String findNewFileSecondChance(List<String> filesBefore, List<String> filesAfter) {
+        for (String fileNew : filesAfter) {
+            boolean found = false;
+            for (String fileOld : filesBefore) {
+                if (fileNew.startsWith("dl.")) found=true;
             }
             if (!found) return fileNew;
         }
