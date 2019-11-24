@@ -76,7 +76,6 @@ public class MemoryImproved {
             commandBuilder.append("\"");
             commandBuilder.append(splitInfo.getNewName());
             commandBuilder.append(".mkv\"");
-            commandBuilder.append(" ");
         }
         return commandBuilder.toString();
     }
@@ -96,7 +95,6 @@ public class MemoryImproved {
             commandBuilder.append("\"");
             commandBuilder.append(splitInfo.getNewName());
             commandBuilder.append(".mp3\"");
-            commandBuilder.append(" ");
         }
         return commandBuilder.toString();
     }

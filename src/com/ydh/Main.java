@@ -64,10 +64,19 @@ public class Main {
                     throw new Exception("Invalid file content - allowed methods: SPLIT/RAW/AUDIOONLY/VIDEOONLY/AUDIOFIX/VIDEOFIX/AVFIX");
             }
             if(Config.VERBOSE_CONSOLE) System.out.println("FF COMMAND: " + ffmpegCommand + "\n\n");
+            if (Config.HALF_MANUAL_FFMPEG) {
+                FileManager.writeFile("ffCommand.bat", ffmpegCommand);
+                System.out.println("Half manual mode is ON! Run ffCommand.bat, wait for finish and press Enter here to continue");
+                System.in.read();
+                removeFile("ffCommand.bat");
+            }
+            else {
+
+                String outputFF = ProcessHelper.execute(ffmpegCommand);
+                if(Config.VERBOSE_CONSOLE) System.out.println("FF OUTPUT: " + outputFF + "\n\n");
+                if(Config.VERBOSE_LOGS) FileManager.writeFile(i+"ffCommand.log", outputFF);
+            }
             if(Config.VERBOSE_LOGS) FileManager.writeFile(i+"ffCommand.bat", ffmpegCommand);
-            String outputFF = ProcessHelper.execute(ffmpegCommand);
-            if(Config.VERBOSE_CONSOLE) System.out.println("FF OUTPUT: " + outputFF + "\n\n");
-            if(Config.VERBOSE_LOGS) FileManager.writeFile(i+"ffCommand.log", outputFF);
             if (Config.AUTO_CLEAN && !movieInfo.isDoSplit())
                 if (!removeFile(fileNameToConvert))
                     throw new Exception("Cannot delete temp file");

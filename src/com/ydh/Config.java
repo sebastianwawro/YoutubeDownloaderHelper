@@ -12,6 +12,7 @@ public class Config {
     public static boolean VERBOSE_CONSOLE;
     public static boolean VERBOSE_LOGS;
     public static boolean AUTO_CLEAN;
+    public static boolean HALF_MANUAL_FFMPEG;
 
     private Config() {}
 
@@ -34,6 +35,9 @@ public class Config {
 
             AUTO_CLEAN = Boolean.valueOf(Settings.getProperty("AutoClean", "false"));
             LOGGER.info("Config: " + "AutoClean" + "=" + AUTO_CLEAN);
+
+            HALF_MANUAL_FFMPEG = Boolean.valueOf(Settings.getProperty("HalfManualFFMPEG", "true"));
+            LOGGER.info("Config: " + "HalfManualFFMPEG" + "=" + HALF_MANUAL_FFMPEG);
         }
         catch (Exception e) {e.printStackTrace();}
     }
